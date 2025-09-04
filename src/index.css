@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+@theme {
+  --color--white-bg: #ffffff;
+  --color-gray-bg: #ededed;
+  --color-black-acc: #1c1c1c;
+  --color-black-text: #242424;
+}
+
+body {
+  background-color: var(--color--white-bg);
+  color: var(--color-black-text);
+}
