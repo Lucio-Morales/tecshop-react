@@ -5,7 +5,7 @@ const Login = () => {
   const [tab, setTab] = useState<'login' | 'register'>('login');
 
   return (
-    <section className="flex flex-1 flex-col items-center px-4 py-10 sm:py-20">
+    <section className="flex flex-1 flex-col items-center px-4 pt-20 sm:py-20">
       {/* Tabs */}
       <div className=" flex w-full max-w-md justify-center gap-2 sm:gap-4 overflow-hidden">
         <button

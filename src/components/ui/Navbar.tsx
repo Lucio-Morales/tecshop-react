@@ -1,7 +1,11 @@
 import { ShoppingCart } from 'lucide-react';
 import { Link, NavLink } from 'react-router-dom';
+import { useAuthStore } from '../../store/authStore';
 
 const Navbar = () => {
+  const { isAuthenticated } = useAuthStore();
+  console.log(isAuthenticated);
+
   return (
     <header className="bg-white shadow">
       <nav className="container mx-auto flex items-center justify-between px-4 py-3" aria-label="Main navigation">
@@ -26,7 +30,11 @@ const Navbar = () => {
 
         {/* Acciones: Carrito + Login */}
         <div className="flex items-center gap-4">
-          <Link to="/cart" className="relative flex items-center hover:text-blue-600" aria-label="Ver carrito">
+          <Link
+            to={isAuthenticated ? '/cart' : '/login'}
+            className="relative flex items-center hover:text-blue-600"
+            aria-label="Ver carrito"
+          >
             <ShoppingCart className="h-6 w-6" />
             <span className="absolute -top-2 -right-2 rounded-full bg-blue-600 px-1 text-xs text-white">0</span>
           </Link>
