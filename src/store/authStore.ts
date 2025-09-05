@@ -16,8 +16,9 @@ import type { User } from '../types/User';
 
 interface AuthState {
   user: User | null;
+  accessToken: string | null; // 👉 se guarda solo en memoria
   isAuthenticated: boolean;
-  login: (user: User) => void;
+  login: (user: User, accessToken: string) => void;
   logout: () => void;
 }
 
@@ -25,10 +26,11 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
+      accessToken: null,
       isAuthenticated: false,
-      login: (user) => set({ user, isAuthenticated: true }),
-      logout: () => set({ user: null, isAuthenticated: false }),
+      login: (user, accessToken) => set({ user, accessToken, isAuthenticated: true }),
+      logout: () => set({ user: null, accessToken: null, isAuthenticated: false }),
     }),
-    { name: 'auth-storage' } // guarda en localStorage automáticamente
+    { name: 'auth-storage' }
   )
 );

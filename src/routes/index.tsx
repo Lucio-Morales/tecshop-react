@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute roles={['CUSTOMER']}>
             <Cart />
           </ProtectedRoute>
         ),
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       {
         path: 'profile',
         element: (
-          <ProtectedRoute>
+          <ProtectedRoute roles={['CUSTOMER']}>
             <div>Profile user</div>
           </ProtectedRoute>
         ),
