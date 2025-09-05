@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Store from '../pages/Store';
 import ProductDetail from '../pages/ProductDetail';
 import Cart from '../pages/Cart';
+import ProtectedRoute from '../features/auth/components/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -14,8 +15,23 @@ export const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'store', element: <Store /> },
       { path: 'product/:id', element: <ProductDetail /> },
-      { path: 'cart', element: <Cart /> },
+      {
+        path: 'cart',
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
       { path: 'login', element: <Login /> },
+      {
+        path: 'profile',
+        element: (
+          <ProtectedRoute>
+            <div>Profile user</div>
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);

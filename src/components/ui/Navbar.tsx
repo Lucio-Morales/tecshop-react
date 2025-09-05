@@ -4,7 +4,6 @@ import { useAuthStore } from '../../store/authStore';
 
 const Navbar = () => {
   const { isAuthenticated } = useAuthStore();
-  console.log(isAuthenticated);
 
   return (
     <header className="bg-white shadow">
@@ -15,14 +14,14 @@ const Navbar = () => {
         </Link>
 
         {/* Links principales */}
-        <ul className="hidden md:flex gap-6 text-gray-700 font-medium">
+        <ul className="hidden md:flex gap-6 text-zinc-700 font-medium">
           <li>
-            <NavLink to="/" className={({ isActive }) => (isActive ? 'text-blue-600' : 'hover:text-blue-600')} end>
+            <NavLink to="/" className={({ isActive }) => (isActive ? 'text-black' : 'hover:text-black')} end>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/store" className={({ isActive }) => (isActive ? 'text-blue-600' : 'hover:text-blue-600')}>
+            <NavLink to="/store" className={({ isActive }) => (isActive ? 'text-black' : 'hover:text-black')}>
               Tienda
             </NavLink>
           </li>
@@ -32,18 +31,18 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           <Link
             to={isAuthenticated ? '/cart' : '/login'}
-            className="relative flex items-center hover:text-blue-600"
+            className="relative flex items-center "
             aria-label="Ver carrito"
           >
-            <ShoppingCart className="h-6 w-6" />
-            <span className="absolute -top-2 -right-2 rounded-full bg-blue-600 px-1 text-xs text-white">0</span>
+            <ShoppingCart className="text-zinc-700 hover:text-black h-6 w-6" />
+            <span className="absolute -top-2 -right-2 rounded-full bg-red-400 px-1 text-xs text-white">0</span>
           </Link>
 
           <Link
-            to="/login"
-            className="rounded-md border border-blue-600 px-3 py-1 text-blue-600 hover:bg-blue-600 hover:text-white transition"
+            to={isAuthenticated ? '/profile' : '/login'}
+            className="rounded-md border border-zinc-700 px-3 py-1 text-zinc-700 hover:text-black transition"
           >
-            Ingresar
+            {isAuthenticated ? 'Profile' : 'Ingresar'}
           </Link>
         </div>
       </nav>
