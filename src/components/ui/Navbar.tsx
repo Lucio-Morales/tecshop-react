@@ -1,16 +1,26 @@
 import { Link, NavLink } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
-import { useAuthStore } from '../../store/authStore';
 
 const Navbar = () => {
-  const { isAuthenticated, user, logout } = useAuthStore();
+  const isAuthenticated = true;
+  const user = { role: 'customer' };
 
   // Determinar URL del carrito según rol
-  const cartLink = isAuthenticated && user?.role === 'CUSTOMER' ? '/cart' : '/login';
+  const cartLink = isAuthenticated && user?.role === 'customer' ? '/cart' : '/login';
 
   return (
-    <header className="bg-white shadow">
-      <nav className="container mx-auto flex items-center justify-between px-4 py-3">
+    <header className="flex justify-center">
+      <nav
+        className="
+      fixed top-0 z-50 
+      bg-white shadow 
+      max-w-6xl 
+      rounded-b-2xl 
+      flex items-center justify-between 
+      px-4 py-3 
+      mx-2 md:mx-auto w-[calc(100%-1rem)]
+    "
+      >
         {/* Logo */}
         <Link to="/" className="text-xl font-bold text-gray-800">
           TechStore
@@ -28,8 +38,6 @@ const Navbar = () => {
               Tienda
             </NavLink>
           </li>
-
-          {/* Solo Admin */}
           {isAuthenticated && user?.role === 'ADMIN' && (
             <li>
               <NavLink
@@ -42,9 +50,8 @@ const Navbar = () => {
           )}
         </ul>
 
-        {/* Acciones: Carrito + Login/Logout */}
+        {/* Acciones */}
         <div className="flex items-center gap-4">
-          {/* Carrito visible para CUSTOMER o invitado */}
           {(user?.role === 'CUSTOMER' || !isAuthenticated) && (
             <Link to={cartLink} className="relative flex items-center hover:text-black" aria-label="Ver carrito">
               <ShoppingCart className="h-6 w-6" />
@@ -54,7 +61,6 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* Usuario no logueado */}
           {!isAuthenticated && (
             <Link
               to="/login"
@@ -64,12 +70,8 @@ const Navbar = () => {
             </Link>
           )}
 
-          {/* Usuario logueado */}
           {isAuthenticated && (
-            <button
-              onClick={logout}
-              className="rounded-md border border-red-600 px-3 py-1 text-red-600 hover:bg-red-600 hover:text-white transition"
-            >
+            <button className="rounded-md border border-red-600 px-3 py-1 text-red-600 hover:bg-red-600 hover:text-white transition">
               Cerrar sesión
             </button>
           )}

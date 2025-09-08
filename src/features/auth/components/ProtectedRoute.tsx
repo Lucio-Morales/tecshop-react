@@ -1,5 +1,4 @@
 import { Navigate } from 'react-router-dom';
-import { useAuthStore } from '../../../store/authStore';
 import type { UserRole } from '../../../types/User';
 import type { JSX } from 'react';
 
@@ -9,13 +8,14 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children, roles }: ProtectedRouteProps) => {
-  const { isAuthenticated, user } = useAuthStore();
+  const isAuthenticated = true;
+  const user = { role: 'customer' };
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
-  if (roles && !roles.includes(user?.role as 'ADMIN' | 'CUSTOMER')) {
+  if (roles && !roles.includes(user?.role as 'admin' | 'customer')) {
     return <Navigate to="/" replace />;
   }
   return children;
