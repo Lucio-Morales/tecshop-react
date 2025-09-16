@@ -1,22 +1,59 @@
+// const Hero = () => {
+//   return (
+//     <section className="relative h-screen flex items-end justify-center text-white">
+//       {/* Imagen de fondo */}
+//       <img
+//         src="/hero-image.webp"
+//         alt="Personas trabajando en equipo con laptops"
+//         className="absolute inset-0 w-full h-full object-cover"
+//       />
+//       {/* Overlay para contraste */}
+//       <div className="absolute inset-0 bg-black/50"></div>
+
+//       {/* Contenido encima */}
+//       <div className="relative z-10 text-center px-4">
+//         <h1 className="text-9xl font-normal md:text-[300px] font-['Bebas_Neue'] uppercase md:-mb-8">Tecshop</h1>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Hero;
+
+import { useEffect, useState } from 'react';
+
 const Hero = () => {
+  const [animate, setAnimate] = useState(false);
+
+  useEffect(() => {
+    // Espera a que la fuente Bebas Neue esté cargada antes de animar
+    document.fonts.load("1em 'Bebas Neue'").then(() => setAnimate(true));
+  }, []);
+
   return (
-    <section className="bg-red-400 relative h-screen flex items-center justify-center text-white">
+    <section className="relative h-screen flex items-end justify-center text-white">
       {/* Imagen de fondo */}
       <img
         src="/hero-image.webp"
         alt="Personas trabajando en equipo con laptops"
         className="absolute inset-0 w-full h-full object-cover"
       />
+
       {/* Overlay para contraste */}
       <div className="absolute inset-0 bg-black/50"></div>
 
       {/* Contenido encima */}
       <div className="relative z-10 text-center px-4">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">Bienvenido a Mi Sitio</h1>
-        <p className="text-lg md:text-xl max-w-xl mx-auto">Soluciones digitales para tu negocio.</p>
-        <button className="mt-6 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-2xl shadow-lg font-medium">
-          Empezar ahora
-        </button>
+        <h1
+          className={`
+            text-9xl md:text-[300px] font-normal font-['Bebas_Neue'] uppercase md:-mb-8
+            leading-none
+            transition-all duration-1000 ease-out
+            ${animate ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'}
+          `}
+        >
+          Tecshop
+        </h1>
       </div>
     </section>
   );
