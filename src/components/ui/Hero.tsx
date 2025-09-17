@@ -1,25 +1,3 @@
-// const Hero = () => {
-//   return (
-//     <section className="relative h-screen flex items-end justify-center text-white">
-//       {/* Imagen de fondo */}
-//       <img
-//         src="/hero-image.webp"
-//         alt="Personas trabajando en equipo con laptops"
-//         className="absolute inset-0 w-full h-full object-cover"
-//       />
-//       {/* Overlay para contraste */}
-//       <div className="absolute inset-0 bg-black/50"></div>
-
-//       {/* Contenido encima */}
-//       <div className="relative z-10 text-center px-4">
-//         <h1 className="text-9xl font-normal md:text-[300px] font-['Bebas_Neue'] uppercase md:-mb-8">Tecshop</h1>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Hero;
-
 import { useEffect, useState } from 'react';
 
 const Hero = () => {

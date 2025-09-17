@@ -13,17 +13,17 @@ const Header = () => {
         <nav className="hidden sm:block">
           <ul className="px-4 flex justify-center space-x-6 font-semibold">
             <li>
-              <a className=" px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
+              <a className="text-gray-500 px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
                 Home
               </a>
             </li>
             <li>
-              <a className=" px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
+              <a className="text-gray-500 px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
                 Shop
               </a>
             </li>
             <li>
-              <a className=" px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
+              <a className="text-gray-500 px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
                 Blog
               </a>
             </li>
