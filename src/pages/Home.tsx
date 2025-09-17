@@ -9,7 +9,7 @@ const Home = () => {
         <div className="mb-14">
           <h1 className="text-2xl font-semibold">Give All You Need</h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           {/* SIDEBAR  */}
           <aside className=" mb-4 border-2 border-gray-300 hidden md:block md:w-1/5 lg:1/6 xl:1/7 rounded-2xl">
             Sidebar
@@ -17,7 +17,7 @@ const Home = () => {
 
           {/* PRODUCT LIST */}
           <section className=" w-full md:w-3/4 lg:w-5/6 xl:w-5/6 rounded-2xl">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 ">
               {/* Product Card */}
               <ProductCard />
               <ProductCard />
