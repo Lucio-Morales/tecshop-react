@@ -1,3 +1,4 @@
+import Sidebar from '../components/ui/Sidebar';
 import Hero from '../components/ui/Hero';
 import ProductCard from '../components/ui/ProductCard';
 
@@ -11,9 +12,10 @@ const Home = () => {
         </div>
         <div className="flex gap-4">
           {/* SIDEBAR  */}
-          <aside className=" mb-4 border-2 border-gray-300 hidden md:block md:w-1/5 lg:1/6 xl:1/7 rounded-2xl">
+          {/* <aside className="p-4 mb-4 border-2 border-gray-300 hidden md:block md:w-1/5 lg:1/6 xl:1/7 rounded-2xl">
             Sidebar
-          </aside>
+          </aside> */}
+          <Sidebar />
 
           {/* PRODUCT LIST */}
           <section className=" w-full md:w-3/4 lg:w-5/6 xl:w-5/6 rounded-2xl">
