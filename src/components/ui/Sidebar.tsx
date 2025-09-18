@@ -2,16 +2,17 @@ import { useState } from 'react';
 import AccordionItem from './AccordionItem';
 import {
   Armchair,
+  BatteryCharging,
   Cpu,
-  Flower2,
   Gamepad,
   Headphones,
-  Home,
   Joystick,
   Laptop,
   Laptop2,
   Mouse,
-  UtensilsCrossed,
+  ScanLine,
+  Shield,
+  Smartphone,
 } from 'lucide-react';
 
 // 1) Definimos tipos
@@ -34,7 +35,7 @@ type SidebarProps = {
 // 2) Datos con íconos de ejemplo
 const defaultCategories: Category[] = [
   {
-    name: 'Computacion',
+    name: 'Computing',
     icon: <Laptop2 className="w-5 h-5 text-gray-500" />,
     subcategories: [
       { name: 'Notebooks', icon: <Laptop className="w-4 h-4 text-gray-400" /> },
@@ -52,12 +53,12 @@ const defaultCategories: Category[] = [
     ],
   },
   {
-    name: 'Hogar',
-    icon: <Home className="w-5 h-5 text-gray-500" />,
+    name: 'Cell phones',
+    icon: <Smartphone className="w-5 h-5 text-gray-500" />,
     subcategories: [
-      { name: 'Muebles', icon: <Armchair className="w-4 h-4 text-gray-400" /> },
-      { name: 'Decoración', icon: <Flower2 className="w-4 h-4 text-gray-400" /> },
-      { name: 'Cocina', icon: <UtensilsCrossed className="w-4 h-4 text-gray-400" /> },
+      { name: 'Phone cases', icon: <Shield className="w-4 h-4 text-gray-400" /> },
+      { name: 'Chargers', icon: <BatteryCharging className="w-4 h-4 text-gray-400" /> },
+      { name: 'Screen Protectors', icon: <ScanLine className="w-4 h-4 text-gray-400" /> },
     ],
   },
 ];
@@ -70,10 +71,8 @@ const Sidebar = ({ categories = defaultCategories, className = '' }: SidebarProp
   };
 
   return (
-    <aside
-      className={`p-4 border-2 border-gray-300 hidden md:block md:w-1/5 lg:w-1/6 xl:w-1/6 rounded-2xl bg-white shadow-sm ${className}`}
-    >
-      <h2 className="text-lg font-semibold mb-4">Categorías</h2>
+    <aside className={`pt-4 hidden md:block md:w-1/5 lg:w-1/6 xl:w-1/6 rounded-2xl bg-white  ${className}`}>
+      <h2 className="text-lg font-semibold mb-4">Category</h2>
       <nav>
         {categories.map((cat, idx) => (
           <AccordionItem
