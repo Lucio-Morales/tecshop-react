@@ -4,7 +4,6 @@ import image_0 from '../../../assets/notebook.png';
 import image_1 from '../../../assets/headphones-1.png';
 import image_2 from '../../../assets/headphones-2.png';
 import image_3 from '../../../assets/headphones-3.png';
-import image_4 from '../../../assets/headphones-4.png';
 import image_5 from '../../../assets/headphones-5.png';
 import image_6 from '../../../assets/notebook-1.png';
 import image_7 from '../../../assets/camara-0.png';
@@ -47,7 +46,7 @@ export const products: Product[] = [
     description: 'Monitor gaming 27 pulgadas con tasa de refresco de 144Hz',
     price: 249.99,
     stock: 10,
-    images: [image_4],
+    images: [image_0],
     category: 'Monitores',
     reviews: '1.5 (324 reviews)',
   },
