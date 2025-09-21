@@ -2,10 +2,8 @@ import { LogIn, ShoppingCart, User } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   const user = { role: 'client' };
-
-  const cartLink = isAuthenticated && user?.role === 'client' ? '/cart' : '/login';
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -18,18 +16,6 @@ const Header = () => {
 
         <nav className="hidden sm:block">
           <ul className="px-4 flex justify-center space-x-6 font-semibold">
-            {/* <li>
-              <NavLink
-                className={({ isActive }) =>
-                  `px-4 py-2 block font-medium rounded-3xl ${
-                    isActive ? 'text-gray-900 ' : 'text-gray-500 hover:text-gray-900'
-                  }`
-                }
-                to="/about"
-              >
-                About us
-              </NavLink>
-            </li> */}
             <li>
               <NavLink
                 className={({ isActive }) =>
@@ -59,57 +45,40 @@ const Header = () => {
         {/* Botones */}
 
         <div className="flex items-center space-x-2 sm:space-x-4">
-          {isAuthenticated ? (
-            // Si el usuario está autenticado, muestra los botones de cliente/perfil
-            <>
-              {user.role === 'client' && (
-                <NavLink
-                  to={cartLink}
-                  className={({ isActive }) =>
-                    `border flex items-center px-2 py-2 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
-                      isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
-                    }`
-                  }
-                >
-                  <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-                </NavLink>
-              )}
-
-              <NavLink
-                to="/profile"
-                className={({ isActive }) =>
-                  `border flex items-center px-2 py-2 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
-                    isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
-                  }`
-                }
-              >
-                <User className="w-4 h-4 sm:w-5 sm:h-5" />
-              </NavLink>
-            </>
-          ) : (
-            // Si el usuario NO está autenticado, muestra el botón de "Iniciar Sesión"
-            <NavLink
-              to={cartLink}
-              className={({ isActive }) =>
-                `px-4 py-2 rounded-3xl font-normal text-gray-500 hover:text-gray-900 transition-colors duration-200 ease-in-out flex items-center space-x-2 ${
-                  isActive ? 'text-gray-900' : ''
-                }`
-              }
-              // className=" px-4 py-2 rounded-3xl font-normal text-gray-500 hover:text-gray-900 transition-colors duration-200 ease-in-out flex items-center space-x-2"
-            >
-              <LogIn className="w-4 h-4" />
-              <span>Iniciar Sesión</span>
-            </NavLink>
-          )}
-        </div>
-        {/* <div className="flex items-center space-x-2 sm:space-x-4">
-          <button className="border flex items-center px-2 py-2 rounded-full cursor-pointer hover:bg-gray-100">
+          {/* <NavLink
+            to="/auth"
+            className={({ isActive }) =>
+              `border flex items-center px-2 py-2 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
+                isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
+              }`
+            }
+          >
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
-          <button className="border flex items-center px-2 py-2 rounded-full cursor-pointer hover:bg-gray-100">
+          </NavLink>
+
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              `border flex items-center px-2 py-2 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
+                isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
+              }`
+            }
+          >
             <User className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
-        </div> */}
+          </NavLink> */}
+
+          <NavLink
+            to="/auth"
+            className={({ isActive }) =>
+              `px-4 py-2 rounded-3xl font-normal text-gray-500 hover:text-gray-900 transition-colors duration-200 ease-in-out flex items-center space-x-2 ${
+                isActive ? 'text-gray-900' : ''
+              }`
+            }
+          >
+            <LogIn className="w-4 h-4" />
+            <span>Iniciar Sesión</span>
+          </NavLink>
+        </div>
       </div>
     </header>
   );

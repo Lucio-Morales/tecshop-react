@@ -1,73 +1,36 @@
-import { useAuthStore } from '../../../store/authStore';
+import { useState } from 'react';
 
 const useAuth = () => {
-  const { user, accessToken, isAuthenticated, login, logout } = useAuthStore();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  // llamada al back para login
-  const handleLogin = async (email: string, password: string) => {
+  const login = async (credentials) => {
+    setLoading(true);
+    setError(null);
+
     try {
-      const res = await fetch('/api/auth/login', {
+      const response = await fetch('/api/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-        credentials: 'include', //👈 importante para cookies HttpOnly (refreshToken)
+        body: JSON.stringify(credentials),
       });
-
-      if (!res.ok) throw new Error('Credenciales inválidas.');
-
-      const data = await res.json();
-
-      // backend devuelve: { user, accessToken }
-
-      login(data.user, data.accessToken);
+      const data = await response.json();
+      if (response.ok) {
+        setUser(data.user);
+      } else {
+        setError(data.message);
+      }
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-      throw error;
-    }
-  };
-
-  // llamada al backend para logout
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        credentials: 'include',
-      });
+      setError('Ocurrió un error inesperado.');
     } finally {
-      logout();
+      setLoading(false);
     }
   };
 
-  // Refrescar accessToken usando refreshToken (cookie HttpOnly)
-  const refreshAccessToken = async () => {
-    try {
-      const res = await fetch('/api/auth/refresh', {
-        method: 'POST',
-        credentials: 'include',
-      });
-
-      if (!res.ok) throw new Error('No se pudo refrescar el token');
-
-      const data = await res.json();
-
-      // back devuelve: { accessToken }
-      login(user!, data.accessToken);
-      return data.accessToken;
-    } catch (error) {
-      console.error('Error al refrescar token:', error);
-      handleLogout();
-      return null;
-    }
+  const register = async (registerData) => {
+    return `register function se ejecuto con los datos: ${registerData}`;
   };
 
-  return {
-    user,
-    accessToken,
-    isAuthenticated,
-    handleLogin,
-    handleLogout,
-    refreshAccessToken,
-  };
+  return { user, loading, error, login, register };
 };
-
-export default useAuth;
