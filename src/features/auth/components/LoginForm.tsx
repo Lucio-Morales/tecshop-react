@@ -1,5 +1,5 @@
 const LoginForm = ({ onSubmit }) => {
-  return <div>login form</div>;
+  return <div className="border ">login form</div>;
 };
 
 export default LoginForm;

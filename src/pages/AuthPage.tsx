@@ -15,12 +15,13 @@ const AuthPage = () => {
     // Lógica para enviar datos al backend
   };
   return (
-    <div className="bg-gray-800 text-white h-screen flex flex-col items-center justify-center">
+    <div className="  h-screen flex flex-col items-center justify-center">
+      {/* NAV BUTTONS */}
       <div className="flex gap-4 mb-8">
         <button
           onClick={() => setIsLogin(true)}
-          className={`px-4 py-2 rounded-md transition ${
-            isLogin ? 'bg-zinc-700 text-white' : 'bg-transparent text-gray-400'
+          className={`px-4 py-2  transition cursor-pointer border-b border-transparent ${
+            isLogin ? 'border-b-2 border-zinc-800 text-black-800' : 'text-gray-600 hover:text-gray-900'
           }`}
           disabled={isLogin}
         >
@@ -28,8 +29,8 @@ const AuthPage = () => {
         </button>
         <button
           onClick={() => setIsLogin(false)}
-          className={`px-4 py-2 rounded-md transition ${
-            !isLogin ? 'bg-zinc-700 text-white' : 'bg-transparent text-gray-400'
+          className={`px-4 py-2  transition cursor-pointer border-b border-transparent ${
+            !isLogin ? 'border-b-2 border-zinc-800 text-black-800' : 'text-gray-600 hover:text-gray-900'
           }`}
           disabled={!isLogin}
         >
@@ -38,8 +39,18 @@ const AuthPage = () => {
       </div>
 
       {/* FORM CONTAINER */}
-      <div className="border border-zinc-700 rounded-lg p-8 w-full max-w-sm shadow-lg">
-        {isLogin ? <LoginForm onSubmit={handleLogin} /> : <RegisterForm onSubmit={handleRegister} />}
+      <div className="border border-zinc-700 rounded-lg p-8 w-full max-w-sm shadow-lg relative min-h-[400px]">
+        {/* Usamos el posicionamiento absoluto en cada formulario. */}
+        {isLogin && (
+          <div className="absolute inset-0 p-8">
+            <LoginForm onSubmit={handleLogin} />
+          </div>
+        )}
+        {!isLogin && (
+          <div className="absolute inset-0 p-8">
+            <RegisterForm onSubmit={handleRegister} />
+          </div>
+        )}
       </div>
     </div>
   );

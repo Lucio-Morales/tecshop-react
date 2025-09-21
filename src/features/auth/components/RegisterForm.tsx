@@ -1,5 +1,11 @@
+import { FormInput } from 'lucide-react';
+
 const RegisterForm = ({ onSubmit }) => {
-  return <div>register form</div>;
+  return (
+    <div className="border">
+      <div></div>
+    </div>
+  );
 };
 
 export default RegisterForm;
