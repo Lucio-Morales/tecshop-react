@@ -1,6 +1,12 @@
-import { ShoppingCart, User } from 'lucide-react';
+import { LogIn, ShoppingCart, User } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
+  const isAuthenticated = true;
+  const user = { role: 'client' };
+
+  const cartLink = isAuthenticated && user?.role === 'client' ? '/cart' : '/login';
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="bg-white px-4 sm:px-6 md:px-8 lg:px-16 mx-2 sm:mx-4 md:mx-8 lg:mx-16 flex items-center justify-between h-12 sm:h-16 rounded-b-lg">
@@ -12,32 +18,98 @@ const Header = () => {
 
         <nav className="hidden sm:block">
           <ul className="px-4 flex justify-center space-x-6 font-semibold">
+            {/* <li>
+              <NavLink
+                className={({ isActive }) =>
+                  `px-4 py-2 block font-medium rounded-3xl ${
+                    isActive ? 'text-gray-900 ' : 'text-gray-500 hover:text-gray-900'
+                  }`
+                }
+                to="/about"
+              >
+                About us
+              </NavLink>
+            </li> */}
             <li>
-              <a className="text-gray-500 px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
-                Home
-              </a>
-            </li>
-            <li>
-              <a className="text-gray-500 px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
+              <NavLink
+                className={({ isActive }) =>
+                  `px-4 py-2 block font-medium rounded-3xl ${
+                    isActive ? 'text-gray-900 ' : 'text-gray-500 hover:text-gray-900 '
+                  }`
+                }
+                to="/"
+              >
                 Shop
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a className="text-gray-500 px-4 py-2 block hover:bg-gray-100 rounded-3xl" href="#">
+              <NavLink
+                className={({ isActive }) =>
+                  `px-4 py-2 block font-medium rounded-3xl ${
+                    isActive ? 'text-gray-900 ' : 'text-gray-500 hover:text-gray-900'
+                  }`
+                }
+                to="/blog"
+              >
                 Blog
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>
         {/* Botones */}
+
         <div className="flex items-center space-x-2 sm:space-x-4">
+          {isAuthenticated ? (
+            // Si el usuario está autenticado, muestra los botones de cliente/perfil
+            <>
+              {user.role === 'client' && (
+                <NavLink
+                  to={cartLink}
+                  className={({ isActive }) =>
+                    `border flex items-center px-2 py-2 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
+                      isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
+                    }`
+                  }
+                >
+                  <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
+                </NavLink>
+              )}
+
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  `border flex items-center px-2 py-2 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
+                    isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
+                  }`
+                }
+              >
+                <User className="w-4 h-4 sm:w-5 sm:h-5" />
+              </NavLink>
+            </>
+          ) : (
+            // Si el usuario NO está autenticado, muestra el botón de "Iniciar Sesión"
+            <NavLink
+              to={cartLink}
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-3xl font-normal text-gray-500 hover:text-gray-900 transition-colors duration-200 ease-in-out flex items-center space-x-2 ${
+                  isActive ? 'text-gray-900' : ''
+                }`
+              }
+              // className=" px-4 py-2 rounded-3xl font-normal text-gray-500 hover:text-gray-900 transition-colors duration-200 ease-in-out flex items-center space-x-2"
+            >
+              <LogIn className="w-4 h-4" />
+              <span>Iniciar Sesión</span>
+            </NavLink>
+          )}
+        </div>
+        {/* <div className="flex items-center space-x-2 sm:space-x-4">
           <button className="border flex items-center px-2 py-2 rounded-full cursor-pointer hover:bg-gray-100">
             <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <button className="border flex items-center px-2 py-2 rounded-full cursor-pointer hover:bg-gray-100">
             <User className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
-        </div>
+        </div> */}
       </div>
     </header>
   );

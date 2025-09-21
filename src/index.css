@@ -8,6 +8,7 @@
 }
 
 body {
+  overflow-y: scroll;
   background-color: var(--color--white-bg);
   color: var(--color-black-text);
   font-family: 'Poppins', Times, serif;

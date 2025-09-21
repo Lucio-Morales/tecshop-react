@@ -15,7 +15,6 @@ import {
   Smartphone,
 } from 'lucide-react';
 
-// 1) Definimos tipos
 type SubCategory = {
   name: string;
   icon: React.ReactNode;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const Hero = () => {
+const Hero = ({ heroImg, heroLabel }) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ const Hero = () => {
     <section className="relative h-screen flex items-end justify-center text-white">
       {/* Imagen de fondo */}
       <img
-        src="/hero-image.webp"
+        src={heroImg}
         alt="Personas trabajando en equipo con laptops"
         className="absolute inset-0 w-full h-full object-cover"
       />
@@ -30,7 +30,7 @@ const Hero = () => {
             ${animate ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0'}
           `}
         >
-          Tecshop
+          {heroLabel}
         </h1>
       </div>
     </section>

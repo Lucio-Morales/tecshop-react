@@ -52,7 +52,7 @@ const Navbar = () => {
 
         {/* Acciones */}
         <div className="flex items-center gap-4">
-          {(user?.role === 'CUSTOMER' || !isAuthenticated) && (
+          {(user?.role === 'customer' || !isAuthenticated) && (
             <Link to={cartLink} className="relative flex items-center hover:text-black" aria-label="Ver carrito">
               <ShoppingCart className="h-6 w-6" />
               {isAuthenticated && user?.role === 'CUSTOMER' && (
