@@ -1,14 +1,30 @@
+import type { FormEvent } from 'react';
 import FormInput from './FormInput';
 
-const LoginForm = ({ onSubmit }) => {
+type LoginFormProps = {
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+};
+
+const LoginForm = ({ onSubmit }: LoginFormProps) => {
   return (
-    <div className="flex flex-col gap-4">
+    <form onSubmit={onSubmit} className=" flex flex-col gap-4">
       <FormInput label="Correo electronico" name="email" type="text" placeholder="ejemplo@gmail.com" required />
       <FormInput label="Contraseña" name="password" type="password" placeholder="**********" required />
-      <button className="mt-2 bg-zinc-800 text-white px-4 py-2 rounded-lg w-full hover:bg-zinc-900 cursor-pointer">
+
+      <a href="#" className="text-sm text-zinc-600 hover:underline -mt-2">
+        ¿Olvidaste tu contraseña?
+      </a>
+      <button
+        type="submit"
+        className="mt-2 font-medium bg-zinc-800 text-white px-4 py-2 rounded-lg w-full hover:bg-zinc-900 cursor-pointer"
+      >
         Iniciar sesión
       </button>
-    </div>
+      <button className="mt-2 font-medium border-2 text-gray-500 border-gray-200 px-4 py-2 rounded-lg w-full hover:text-gray-600 hover:bg-gray-100 cursor-pointer flex items-center justify-center gap-2">
+        <img src="/google-icon.svg" className="w-6 h-6" alt="Google Icon" />
+        <span>Ingresar con Google</span>
+      </button>
+    </form>
   );
 };
 

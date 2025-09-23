@@ -1,15 +1,23 @@
+import type { FormEvent } from 'react';
 import FormInput from './FormInput';
 
-const RegisterForm = ({ onSubmit }) => {
+type RegisterFormProps = {
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+};
+
+const RegisterForm = ({ onSubmit }: RegisterFormProps) => {
   return (
-    <div className="flex flex-col gap-5">
+    <form onSubmit={onSubmit} className="flex flex-col gap-5">
       <FormInput label="Nombre completo" name="name" type="text" placeholder="Lucio Morales" required />
       <FormInput label="Correo electronico" name="email" type="text" placeholder="ejemplo@gmail.com" required />
       <FormInput label="Contraseña" name="password" type="password" placeholder="**********" required />
-      <button className="mt-2 bg-zinc-800 text-white px-4 py-2 w-full rounded-lg hover:bg-zinc-900 cursor-pointer">
+      <button
+        type="submit"
+        className="mt-2 bg-zinc-800 text-white px-4 py-2 w-full rounded-lg hover:bg-zinc-900 cursor-pointer"
+      >
         Crear cuenta
       </button>
-    </div>
+    </form>
   );
 };
 

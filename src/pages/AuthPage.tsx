@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import LoginForm from '../features/auth/components/LoginForm';
 import RegisterForm from '../features/auth/components/RegisterForm';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
-  const handleLogin = () => {
-    console.log('handleLogin');
+  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    alert('Click en handleLogin');
     // Lógica para enviar datos al backend
   };
 
-  const handleRegister = () => {
-    console.log('handleRegister');
+  const handleRegister = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    alert('Click en handleRegister');
     // Lógica para enviar datos al backend
   };
   return (
@@ -20,7 +22,7 @@ const AuthPage = () => {
       <div className="flex gap-4 mb-8">
         <button
           onClick={() => setIsLogin(true)}
-          className={`px-4 py-2  transition cursor-pointer border-b border-transparent ${
+          className={`px-4 py-2 text-lg transition cursor-pointer border-b-2 border-transparent ${
             isLogin ? 'border-b-2 border-zinc-800 text-black-800' : 'text-gray-600 hover:text-gray-900'
           }`}
           disabled={isLogin}
@@ -29,7 +31,7 @@ const AuthPage = () => {
         </button>
         <button
           onClick={() => setIsLogin(false)}
-          className={`px-4 py-2  transition cursor-pointer border-b border-transparent ${
+          className={`px-4 py-2 text-lg transition cursor-pointer border-b-2 border-transparent ${
             !isLogin ? 'border-b-2 border-zinc-800 text-black-800' : 'text-gray-600 hover:text-gray-900'
           }`}
           disabled={!isLogin}

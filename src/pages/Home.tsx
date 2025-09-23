@@ -3,7 +3,7 @@ import Hero from '../components/ui/Hero';
 import ProductList from '../features/products/components/ProductList';
 
 const Home = () => {
-  const heroImg = '/hero-image.webp';
+  const heroImg = '/hero-img.webp';
   const heroLabel = 'Shop';
   return (
     <div>

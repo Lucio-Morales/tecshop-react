@@ -49,7 +49,12 @@ function AccordionItem({ category, index, isOpen, onToggle }: AccordionItemProps
             onToggle();
           }
         }}
-        className="w-full flex items-center justify-between px-2 py-3 text-left text-gray-700 font-medium hover:bg-gray-100 rounded-xl transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200 cursor-pointer"
+        className={`
+    w-full flex items-center justify-between px-2 py-3 text-left text-gray-700 font-medium 
+    hover:bg-gray-100 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200 cursor-pointer
+    ${isOpen ? 'bg-gray-100' : ''}
+  `}
+        // className="w-full flex items-center justify-between px-2 py-3 text-left text-gray-700 font-medium hover:bg-gray-100  transition focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200 cursor-pointer"
       >
         <div className="flex items-center gap-2">
           {category.icon}
