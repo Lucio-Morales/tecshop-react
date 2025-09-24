@@ -51,6 +51,7 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         onChange={handleChange}
         placeholder="Lucio Morales"
         required
+        disabled={loading}
         error={validationErrors.name}
       />
       <FormInput
@@ -61,6 +62,7 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         onChange={handleChange}
         placeholder="ejemplo@gmail.com"
         required
+        disabled={loading}
         error={validationErrors.email}
       />
       <FormInput
@@ -71,6 +73,7 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         onChange={handleChange}
         placeholder="**********"
         required
+        disabled={loading}
         error={validationErrors.password}
       />
       <button

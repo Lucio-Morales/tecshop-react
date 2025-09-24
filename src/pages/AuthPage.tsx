@@ -4,21 +4,23 @@ import RegisterForm from '../features/auth/components/RegisterForm';
 import { registerUser } from '../api/requests/posts';
 
 const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
-  const [status, setStatus] = useState('idle'); // 'idle | 'loading | 'success' | 'error'
+  const [view, setView] = useState('register'); // register | success | login | error
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
   const handleRegister = async (userData: any) => {
-    setStatus('loading');
+    setLoading(true);
 
     try {
       await registerUser(userData);
-      setStatus('success');
-      setMessage('Registro exitoso, ya puedes iniciar sesion.');
+      setView('success');
+      setMessage('¡Registro exitoso! Inicia sesión por favor.');
     } catch (error: any) {
-      setStatus('error');
+      setView('error');
       const errorMessage = error.response?.data?.message || 'Ocurrió un error inesperado.';
       setMessage(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
   const handleLogin = (event: any) => {
@@ -29,51 +31,69 @@ const AuthPage = () => {
 
   return (
     <div className="h-screen flex flex-col items-center pt-30">
-      {/* Renderizado condicional basado en el estado */}
-      {status === 'success' && <div className="text-green-600 text-center mb-4">{message}</div>}
-      {status === 'error' && <div className="text-red-600 text-center mb-4">{message}</div>}
+      {/* TABS BUTTONS */}
+      <div className="flex gap-4 mb-8">
+        <button
+          onClick={() => setView('login')}
+          className={`px-4 py-2 text-lg transition cursor-pointer border-b-2 border-transparent ${
+            view === 'login' ? 'border-b-2 border-zinc-800 text-black-800' : 'text-gray-600 hover:text-gray-900'
+          }`}
+          disabled={loading || view === 'success'}
+        >
+          Iniciar sesión
+        </button>
+        <button
+          onClick={() => setView('register')}
+          className={`px-4 py-2 text-lg transition cursor-pointer border-b-2 border-transparent ${
+            view === 'register' ? 'border-b-2 border-zinc-800 text-black-800' : 'text-gray-600 hover:text-gray-900'
+          }`}
+          disabled={loading || view === 'success'}
+        >
+          Crear cuenta
+        </button>
+      </div>
 
-      {/* Solo muestra el formulario si no está en estado de éxito */}
-      {status !== 'success' && (
-        <>
-          {/* TABS BUTTONS */}
-          <div className="flex gap-4 mb-8">
-            <button
-              onClick={() => setIsLogin(true)}
-              className={`px-4 py-2 text-lg transition cursor-pointer border-b-2 border-transparent ${
-                isLogin ? 'border-b-2 border-zinc-800 text-black-800' : 'text-gray-600 hover:text-gray-900'
+      {/* FORM CONTAINER: Renderizado condicional basado en la vista */}
+      <div className="rounded-lg w-full max-w-sm shadow-lg relative min-h-[400px] ">
+        {/* Usamos el posicionamiento absoluto en cada formulario. */}
+        {view === 'login' && (
+          <div className="absolute inset-0 p-2 ">
+            <LoginForm onSubmit={handleLogin} loading={loading} />
+          </div>
+        )}
+        {view === 'register' && (
+          <div className="absolute inset-0 p-2 ">
+            <RegisterForm onRegister={handleRegister} loading={loading} />
+          </div>
+        )}
+
+        {/* Si la vista es 'success' o 'error', se muestra el mensaje centrado */}
+        {(view === 'success' || view === 'error') && (
+          <div className=" absolute inset-0 p-8 flex flex-col items-center justify-center text-center">
+            <h2 className={`text-xl font-semibold mb-2 ${view === 'success' ? 'text-green-500' : 'text-red-500'}`}>
+              {view === 'success' ? '¡Éxito!' : 'Error'}
+            </h2>
+            <p
+              className={`border p-2 rounded-lg mb-4 ${
+                view === 'error'
+                  ? 'border-red-500 bg-red-300 text-red-500'
+                  : 'border-green-500 bg-green-500 text-green-200'
               }`}
-              disabled={isLogin}
             >
-              Iniciar sesión
-            </button>
+              {message}
+            </p>
+
             <button
-              onClick={() => setIsLogin(false)}
-              className={`px-4 py-2 text-lg transition cursor-pointer border-b-2 border-transparent ${
-                !isLogin ? 'border-b-2 border-zinc-800 text-black-800' : 'text-gray-600 hover:text-gray-900'
-              }`}
-              disabled={!isLogin}
+              onClick={() => {
+                view === 'success' ? setView('login') : setView('register');
+              }}
+              className="w-1/2 py-2 px-4 text-sm rounded-md text-white font-semibold bg-zinc-800 hover:bg-zinc-900 cursor-pointer"
             >
-              Crear cuenta
+              {view === 'success' ? 'Iniciar sesion' : 'Volver a intentar'}
             </button>
           </div>
-
-          {/* FORM CONTAINER */}
-          <div className="rounded-lg w-full max-w-sm shadow-lg relative ">
-            {/* Usamos el posicionamiento absoluto en cada formulario. */}
-            {isLogin && (
-              <div className="absolute inset-0 p-2 ">
-                <LoginForm onSubmit={handleLogin} />
-              </div>
-            )}
-            {!isLogin && (
-              <div className="absolute inset-0 p-2 ">
-                <RegisterForm onRegister={handleRegister} loading={status === 'loading'} />
-              </div>
-            )}
-          </div>
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 };
