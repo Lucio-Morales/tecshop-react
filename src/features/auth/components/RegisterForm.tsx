@@ -25,7 +25,7 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     // Aquí podrías añadir una validación básica antes de enviar al padre
     // Por ejemplo, setValidationErrors({...})
@@ -36,8 +36,31 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         password: 'La contraseña es obligatoria',
       });
     }
-    if (onRegister) {
-      onRegister(formData);
+    console.log('formData:', formData);
+
+    try {
+      // Llama al endpoint del backend para registrar
+      // y manejar el rol
+      const response = await fetch('http://localhost:3000/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fullName: formData.name, email: formData.email, password: formData.password }),
+      });
+      console.log('RESPONSE:', response);
+
+      const data = await response.json();
+      console.log('DATA:', data);
+
+      if (response.ok) {
+        setFormData({ name: '', email: '', password: '' });
+        alert(data.message);
+      } else {
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      alert('Error inesperado al registrar.');
     }
   };
 
@@ -80,7 +103,7 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         type="submit"
         disabled={loading}
         className={`mt-2 text-white px-4 py-2 w-full rounded-lg cursor-pointer ${
-          loading ? 'bg-gray-700 cursor-not-allowed' : 'bg-zinc-800 hover:bg-zinc-900'
+          loading ? 'bg-zinc-700 cursor-not-allowed' : 'bg-zinc-800 hover:bg-zinc-900'
         }`}
       >
         {loading ? 'Creando cuenda..' : 'Crear cuenta'}
