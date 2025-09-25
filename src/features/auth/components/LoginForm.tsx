@@ -1,17 +1,7 @@
-import { useState, type FormEvent } from 'react';
+import { useState } from 'react';
 import FormInput from './FormInput';
 import { supabase } from '../../../lib/supabaseClient';
-
-type LoginFormProps = {
-  setSession: any;
-  // onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  loading: boolean;
-};
-
-interface UserCredentials {
-  email: string;
-  password: string;
-}
+import type { LoginFormProps, UserCredentials } from '../types';
 
 const LoginForm = ({ setSession, loading }: LoginFormProps) => {
   const [credentials, setCredentials] = useState<UserCredentials>({

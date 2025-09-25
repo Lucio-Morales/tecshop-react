@@ -1,37 +1,27 @@
 import { createBrowserRouter } from 'react-router-dom';
 import PublicLayout from '../layouts/PublicLayout';
 import Home from '../pages/Home';
-import ProductDetail from '../pages/ProductDetail';
-import Cart from '../pages/Cart';
-import ProtectedRoute from '../features/auth/components/ProtectedRoute';
-import AboutUs from '../pages/AboutUs';
 import AuthPage from '../pages/AuthPage';
+import { PrivateRoute } from '../features/auth/components/PrivateRoute';
+import AdminDashboard from '../features/user/admin/Dashboard';
 
 export const router = createBrowserRouter([
+  // RUTAS PÚBLICAS
   {
     path: '/',
     element: <PublicLayout />,
     children: [
       { index: true, element: <Home /> },
-      { path: '/about', element: <AboutUs /> },
-      { path: 'product/:id', element: <ProductDetail /> },
-      {
-        path: 'cart',
-        element: (
-          <ProtectedRoute roles={['customer']}>
-            <Cart />
-          </ProtectedRoute>
-        ),
-      },
       { path: 'auth', element: <AuthPage /> },
-      {
-        path: 'profile',
-        element: (
-          <ProtectedRoute roles={['customer']}>
-            <div>Profile user</div>
-          </ProtectedRoute>
-        ),
-      },
     ],
+  },
+
+  {
+    path: '/admin',
+    element: (
+      <PrivateRoute requiredRoles={['admin']}>
+        <AdminDashboard />
+      </PrivateRoute>
+    ),
   },
 ]);
