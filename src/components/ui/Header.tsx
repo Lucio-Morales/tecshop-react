@@ -19,54 +19,31 @@ const Header = () => {
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  `px-4 py-2 block font-medium rounded-3xl ${
+                  `px-4 py-2 block font-normal rounded-3xl ${
                     isActive ? 'text-gray-900 ' : 'text-gray-500 hover:text-gray-900 '
                   }`
                 }
                 to="/"
               >
-                Shop
+                Productos
               </NavLink>
             </li>
             <li>
               <NavLink
                 className={({ isActive }) =>
-                  `px-4 py-2 block font-medium rounded-3xl ${
+                  `px-4 py-2 block font-normal rounded-3xl ${
                     isActive ? 'text-gray-900 ' : 'text-gray-500 hover:text-gray-900'
                   }`
                 }
-                to="/blog"
+                to="/about"
               >
-                Blog
+                Quiénes somos?
               </NavLink>
             </li>
           </ul>
         </nav>
-        {/* Botones */}
 
         <div className="flex items-center space-x-2 sm:space-x-4">
-          {/* <NavLink
-            to="/auth"
-            className={({ isActive }) =>
-              `border flex items-center px-2 py-2 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
-                isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
-              }`
-            }
-          >
-            <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
-          </NavLink>
-
-          <NavLink
-            to="/profile"
-            className={({ isActive }) =>
-              `border flex items-center px-2 py-2 rounded-full cursor-pointer transition-colors duration-200 ease-in-out ${
-                isActive ? 'text-gray-900' : 'text-gray-500 hover:text-gray-900'
-              }`
-            }
-          >
-            <User className="w-4 h-4 sm:w-5 sm:h-5" />
-          </NavLink> */}
-
           <NavLink
             to="/auth"
             className={({ isActive }) =>

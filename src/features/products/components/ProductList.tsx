@@ -104,7 +104,7 @@ export const products: Product[] = [
 
 const ProductList = () => {
   return (
-    <section className="w-full px-8 md:w-3/4 lg:w-5/6 xl:w-5/6 rounded-2xl">
+    <section className="w-full px-2 md:w-3/4 lg:w-5/6 xl:w-5/6 rounded-2xl">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 ">
         {/* Product Card */}
         {products.map((product) => (

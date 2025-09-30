@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import FormInput from './FormInput';
 
-type RegisterFormProps = {
-  onRegister: (formData: any) => void;
-  loading: boolean;
-};
+// type RegisterFormProps = {
+//   onRegister: (formData: any) => void;
+//   loading: boolean;
+// };
 
-const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
+const RegisterForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,6 +20,8 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
     password: '',
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (event: any) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -27,6 +29,7 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+    setLoading(true);
     // Aquí podrías añadir una validación básica antes de enviar al padre
     // Por ejemplo, setValidationErrors({...})
     if (!formData.name || !formData.email || !formData.password) {
@@ -48,6 +51,7 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         },
         body: JSON.stringify({ fullName: formData.name, email: formData.email, password: formData.password }),
       });
+
       console.log('RESPONSE:', response);
 
       const data = await response.json();
@@ -74,7 +78,6 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         onChange={handleChange}
         placeholder="Lucio Morales"
         required
-        disabled={loading}
         error={validationErrors.name}
       />
       <FormInput
@@ -85,7 +88,6 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         onChange={handleChange}
         placeholder="ejemplo@gmail.com"
         required
-        disabled={loading}
         error={validationErrors.email}
       />
       <FormInput
@@ -96,12 +98,10 @@ const RegisterForm = ({ onRegister, loading }: RegisterFormProps) => {
         onChange={handleChange}
         placeholder="**********"
         required
-        disabled={loading}
         error={validationErrors.password}
       />
       <button
         type="submit"
-        disabled={loading}
         className={`mt-2 text-white px-4 py-2 w-full rounded-lg cursor-pointer ${
           loading ? 'bg-zinc-700 cursor-not-allowed' : 'bg-zinc-800 hover:bg-zinc-900'
         }`}

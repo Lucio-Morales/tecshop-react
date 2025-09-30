@@ -2,8 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import PublicLayout from '../layouts/PublicLayout';
 import Home from '../pages/Home';
 import AuthPage from '../pages/AuthPage';
-import { PrivateRoute } from '../features/auth/components/PrivateRoute';
-import AdminDashboard from '../features/user/admin/Dashboard';
+import AboutUs from '../pages/AboutUs';
 
 export const router = createBrowserRouter([
   // RUTAS PÚBLICAS
@@ -13,15 +12,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: 'auth', element: <AuthPage /> },
+      { path: 'about', element: <AboutUs /> },
     ],
-  },
-
-  {
-    path: '/admin',
-    element: (
-      <PrivateRoute requiredRoles={['admin']}>
-        <AdminDashboard />
-      </PrivateRoute>
-    ),
   },
 ]);

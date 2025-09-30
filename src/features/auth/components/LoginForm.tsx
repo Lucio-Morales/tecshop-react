@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import FormInput from './FormInput';
-import { supabase } from '../../../lib/supabaseClient';
-import type { LoginFormProps, UserCredentials } from '../types';
+import type { UserCredentials } from '../types';
 
-const LoginForm = ({ setSession, loading }: LoginFormProps) => {
+const LoginForm = () => {
   const [credentials, setCredentials] = useState<UserCredentials>({
     email: '',
     password: '',
@@ -12,30 +11,7 @@ const LoginForm = ({ setSession, loading }: LoginFormProps) => {
   const handleLogin = async (event: any) => {
     event.preventDefault();
 
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: credentials.email,
-        password: credentials.password,
-      });
-      if (error) throw error;
-
-      // Si el inicio de sesión es exitoso, actualiza la sesión
-      setSession(data.session);
-
-      //Obtén el perfil del usuario para obtener su rol
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', data.session.user.id)
-        .single();
-      console.log(data);
-
-      if (profileError) throw profileError;
-
-      alert(`¡Inicio de sesión exitoso! Tu rol es: ${profile.role}`);
-    } catch (error: any) {
-      alert(`Error al iniciar sesión: ${error.message}`);
-    }
+    console.log('Login click');
   };
 
   // Tipa el evento correctamente
@@ -77,7 +53,7 @@ const LoginForm = ({ setSession, loading }: LoginFormProps) => {
         type="submit"
         className="mt-2 font-medium bg-zinc-800 text-white px-4 py-2 rounded-lg w-full hover:bg-zinc-900 cursor-pointer"
       >
-        {loading ? 'Iniciando sesión..' : 'Iniciar sesión'}
+        Iniciar sesión
       </button>
       <button className="mt-2 font-medium border-2 text-gray-500 border-gray-200 px-4 py-2 rounded-lg w-full hover:text-gray-600 hover:bg-gray-100 cursor-pointer flex items-center justify-center gap-2">
         <img src="/google-icon.svg" className="w-6 h-6" alt="Google Icon" />

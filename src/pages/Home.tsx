@@ -4,7 +4,7 @@ import ProductList from '../features/products/components/ProductList';
 
 const Home = () => {
   const heroImg = '/hero-img.webp';
-  const heroLabel = 'Shop';
+  const heroLabel = 'Productos';
   return (
     <div>
       <Hero heroImg={heroImg} heroLabel={heroLabel} />
